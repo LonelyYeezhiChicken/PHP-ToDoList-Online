@@ -1,17 +1,17 @@
 <?php  
    require_once("../config/Database.php");
-   
+   $database = new Database();
    //判斷需要連哪一個資料庫
-   if($mode === "test"){
-    $db = $test;
+   if($myModel === "test"){
+    $db = $database -> test();
    }else{
-    $db = $default;
+    $db = $database -> default();
    }  
-   
+   echo $db["DBDriver"];
    try {  
       $conn = new PDO( 
-        "{$db.DBDriver}:host={$db.hostname};dbname={$db.database};charset=utf8"
-        $db.username,$db.password);   
+        "{$db["DBDriver"]}:host={$db["hostname"]};dbname={$db["database"]};charset={$db["charset"]}",
+        $db["username"],$db["password"]);   
    } 
    catch( PDOException $e ) {  
       die( "Error connecting to SQL Server" );   
