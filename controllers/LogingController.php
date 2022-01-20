@@ -6,13 +6,16 @@ require_once("../services/Services/UsersService.php");
 
 $email=$_POST["email"];
 $password=$_POST["password"];
-
-$userrepo = new UserRepository();
-$userService = new UsersService($userrepo);
-if($userService->IsValid($email,$password)){
-    echo "true";
-}else{
-    echo "false";
+try{
+    $userrepo = new UserRepository();
+    $userService = new UsersService($userrepo);
+    if($userService->IsValid($email,$password)){
+        echo "true";
+    }else{
+        echo "false";
+    }
 }
-
+catch(Exception $e){
+    header("location: ../views/Error404.php");
+}
  ?>
