@@ -25,6 +25,15 @@ class UsersService{
            return false;
        }       
      }
+
+     /**
+      * 取得使用者資料
+      */
+     public function ProcessLogin($email){
+        //get user data from repo
+       $userData = $this->usersrepo->LoadUserByEmail($email);
+       return $userData;
+     }
 }
 
 
