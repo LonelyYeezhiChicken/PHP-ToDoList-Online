@@ -7,18 +7,23 @@ class UsersService{
 
      /**
       * 登入驗證
-      * @var bool
+      *@var bool
       */
      public function IsValid($email,$password):bool
      {
         //get user data from repo
        $userData = $this->usersrepo->LoadUserByEmail($email);
-       //判斷密碼是否正確
-       if($userData["password"] === $password){
-           return true;
+       //檢查是否有撈到資料
+       if($userData !== null){
+        //判斷密碼是否正確
+        if($userData["password"] === $password){
+            return true;
+        }else{
+            return false;
+        }
        }else{
            return false;
-       }
+       }       
      }
 }
 
